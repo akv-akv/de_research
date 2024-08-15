@@ -1,6 +1,6 @@
 # minikube
 minikube-start-docker:
-	minikube start --driver=docker
+	minikube start --driver=docker --cpus='4' --memory='6g'
 minikube-delete:
 	minikube delete
 minikube-dashboard:
