@@ -4,9 +4,3 @@ kind: Application
 metadata:
   name: kube-prometheus-stack
   namespace: argocd
-spec:
-  source:
-    helm:
-      valuesObject:
-        extraArgs:
-          - "--log.level=debug"
