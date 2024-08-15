@@ -1,2 +1,2 @@
 # app configuration
-helmChartPath: kubernetes/charts/airbyte
+#helmChartPath: kubernetes/charts/airbyte
