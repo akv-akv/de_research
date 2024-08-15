@@ -4,4 +4,4 @@ resources:
   - ../../../base/prometheus
 
 patches:
-  - path: kube_prometheus_stack.yaml
+  - path: kube-prometheus-stack.yaml
