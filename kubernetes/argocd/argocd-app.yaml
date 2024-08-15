@@ -9,5 +9,5 @@ spec:
   project: default
   source:
     repoURL: https://github.com/akv-akv/de_research.git
-    path: /kubernetes/argocd
+    path: kubernetes/argocd
     targetRevision: main
