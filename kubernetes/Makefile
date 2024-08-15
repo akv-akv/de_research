@@ -9,9 +9,6 @@ minikube-ip:
 	minikube ip
 
 # Argo CD
-argo-cd-install:
-	kubectl create namespace argocd
-	kubectl apply --namespace=argocd --filename=https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 argo-cd-get-password: # username: admin
 	kubectl get secret argocd-initial-admin-secret --namespace=argocd --output=jsonpath="{.data.password}" | base64 -d && echo
 argo-cd-ui:

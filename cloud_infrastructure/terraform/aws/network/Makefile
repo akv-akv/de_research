@@ -11,4 +11,4 @@ infracost-login:
 	infracost auth login
 
 infracost-calculate:
-	infracost breakdown --path .
+	infracost breakdown --path . --fields all

@@ -1,19 +1,22 @@
-# List of tools used
+# Tools Overview
 
-- poetry - manages package dependencies
+## Dependency Management
+
+- **Poetry**: Manages Python package dependencies.
 
 ## Infrastructure as Code
-- Terraform
-- Infracost
-- TFLint - used as a pre-commit hook
-- Trivy - used as a pre-commit hook
 
-## Git-related
+- **Terraform**: Manages infrastructure resources.
+- **Infracost**: Provides cost estimates for Terraform projects.
+- **TFLint**: Linting tool for Terraform, used as a pre-commit hook.
+- **Trivy**: Security scanning tool, used as a pre-commit hook.
 
-- Git
-- [GitLeaks](https://github.com/gitleaks/gitleaks) - prevents hardcoded secrets from being published to git
-- [pre-commit]() - allows to run useful hooks on each commit to test code
+## Version Control & Git Hooks
 
-## Local testing
+- **Git**: Distributed version control system.
+- **[GitLeaks](https://github.com/gitleaks/gitleaks)**: Scans for hardcoded secrets to prevent them from being committed to Git.
+- **[pre-commit](https://pre-commit.com/)**: Framework for managing and maintaining multi-language pre-commit hooks.
 
-- Minikube
+## Local Testing
+
+- **Minikube**: Runs a local Kubernetes cluster for testing and development.
