@@ -11,9 +11,9 @@ spec:
     name: in-cluster
   project: default
   source:
-    path: apps  # contains application spec files
-    repoURL: https://github.com/argoproj/argocd-example-apps
-    targetRevision: main
+    path: kubentenes/apps  # contains application spec files
+    repoURL: https://github.com/akv-akv/de_project
+    targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true
