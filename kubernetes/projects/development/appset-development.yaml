@@ -46,7 +46,7 @@ spec:
         server: https://kubernetes.default.svc
         namespace: 'development'
       sources:
-        - repoURL: "{{ default \"https://github.com/Lp-Francois/argocd-multi-tenancy.git\" .srcRepoURL  }}"
+        - repoURL: "{{ default \"https://github.com/akv-akv/de_research.git\" .srcRepoURL  }}"
           targetRevision: 'HEAD'
           path: "{{ .helmChartPath }}"
           helm:
@@ -55,7 +55,7 @@ spec:
               - "values.local.yaml"
               - "$values/{{ .path.path }}/deploy.yaml"
 
-        - repoURL: 'https://github.com/Lp-Francois/argocd-multi-tenancy.git'
+        - repoURL: 'https://github.com/akv-akv/de_research.git'
           targetRevision: HEAD
           # resolves to the root of the repo
           ref: values
