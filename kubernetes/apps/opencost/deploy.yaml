@@ -1,4 +1,4 @@
 # app configuration
 helmChartPath: charts/opencost
-helmRepoURL: https://github.com/opencost/opencost-helm-chart.git
+srcRepoURL: https://github.com/opencost/opencost-helm-chart.git
 
