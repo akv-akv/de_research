@@ -5,6 +5,8 @@
 ## Infrastructure as Code
 - Terraform
 - Infracost
+- TFLint - used as a pre-commit hook
+- Trivy - used as a pre-commit hook
 
 ## Git-related
 
