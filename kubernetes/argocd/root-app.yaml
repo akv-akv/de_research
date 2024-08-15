@@ -13,7 +13,7 @@ spec:
   source:
     path: kubernetes/apps  # contains application spec files
     repoURL: https://github.com/akv-akv/de_research.git
-    targetRevision: HEAD
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true
