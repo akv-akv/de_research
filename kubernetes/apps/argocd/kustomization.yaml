@@ -13,7 +13,7 @@ resources:
 namespace: argocd
 images:
   - name: quay.io/argoproj/argocd
-    newTag: v2.9.5
+    newTag: v2.12.0
 patches: []
 commonAnnotations:
   reloader.stakater.com/auto: "true"
