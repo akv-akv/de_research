@@ -1,2 +1,2 @@
 # app configuration
-helmChartPath: charts/dummy-api
+helmChartPath: kubernetes/charts/dummy-api
