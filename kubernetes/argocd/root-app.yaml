@@ -11,7 +11,7 @@ spec:
     name: in-cluster
   project: default
   source:
-    path: kubentenes/apps  # contains application spec files
+    path: kubernenes/apps  # contains application spec files
     repoURL: https://github.com/akv-akv/de_research.git
     targetRevision: HEAD
   syncPolicy:
