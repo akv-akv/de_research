@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: root-app
-  namespace: apps
+  namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -14,3 +14,6 @@ spec:
     path: apps  # contains application spec files
     repoURL: https://github.com/argoproj/argocd-example-apps
     targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
