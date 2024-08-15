@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: core
+spec:
+  description: Core Project
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: argocd
+    server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  orphanedResources:
+    warn: false
