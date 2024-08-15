@@ -14,13 +14,14 @@ spec:
     kind: Application
 
   syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
     automated:
-      allowEmpty: true
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - Replace=true
+      - ServerSideApply=true
 
   source:
     chart: kube-prometheus-stack
