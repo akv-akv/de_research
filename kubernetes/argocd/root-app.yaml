@@ -11,9 +11,14 @@ spec:
     name: in-cluster
   project: default
   source:
-    path: kubernetes/apps/test_app  # contains application spec files
-    repoURL: https://github.com/akv-akv/de_research
+    path: kubernetes/projects
+    #repoURL: https://github.com/Lp-Francois/argocd-multi-tenancy.git
+    repoURL: https://github.com/argoproj/argocd-example-apps
     targetRevision: HEAD
   syncPolicy:
     automated:
+      allowEmpty: true
       prune: true
+      selfHeal: true
+    syncOptions:
+    - allowEmpty=true
