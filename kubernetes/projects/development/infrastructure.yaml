@@ -42,7 +42,7 @@ spec:
       repoURL: https://github.com/akv-akv/de_research.git
       revision: HEAD
       directories:
-      - path: infrastructure/envs/development/*
+      - path: kubernetes/infrastructure/envs/development/*
   template:
     metadata:
       name: '{{.path.basename}}-addon'
