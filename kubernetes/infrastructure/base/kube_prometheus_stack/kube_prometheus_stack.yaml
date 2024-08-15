@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: kube-prometheus-stack
   namespace: argocd
 spec:
   project: infrastructure
@@ -22,7 +22,7 @@ spec:
       selfHeal: true
 
   source:
-    chart: prometheus
+    chart: kube-prometheus-stack
     # https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml
     repoURL: https://prometheus-community.github.io/helm-charts
     # https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/Chart.yaml
