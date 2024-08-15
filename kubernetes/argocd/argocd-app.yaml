@@ -6,6 +6,9 @@ spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
+  info:
+    - name: 'Example:'
+      value: 'https://example.com'
   project: default
   source:
     repoURL: https://github.com/akv-akv/de_research.git
