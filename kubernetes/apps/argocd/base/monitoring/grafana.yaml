@@ -8,7 +8,7 @@ spec:
   project: monitoring
   source:
     repoURL: 'https://github.com/akv-akv/de_research.git'
-    path: apps/monitoring/grafana
+    path: kubernetes/apps/monitoring/grafana
     targetRevision: main
   destination:
     namespace: monitoring

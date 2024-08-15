@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   # ArgoCD Projects
   - base/projects/core.yaml
+  # - base/projects/monitoring.yaml
 
   # Core apps
   - base/core/argocd.yaml
