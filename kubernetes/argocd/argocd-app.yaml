@@ -11,3 +11,6 @@ spec:
     repoURL: https://github.com/akv-akv/de_research.git
     path: kubernetes/argocd
     targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
