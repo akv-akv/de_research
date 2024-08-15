@@ -27,6 +27,8 @@ spec:
     repoURL: https://prometheus-community.github.io/helm-charts
     # https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/Chart.yaml
     targetRevision: 61.9.0
+    syncOptions:
+    - Replace=true
     helm:
       valuesObject:
         resources: {}
