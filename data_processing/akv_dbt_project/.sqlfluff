@@ -1,0 +1,17 @@
+[sqlfluff]
+dialect = duckdb
+templater = dbt
+max_line_length = 120
+ignore_templated_areas = True
+exclude_rules = references.quoting, aliasing.forbid, structure.column_order
+large_file_skip_char_limit = 0
+
+[sqlfluff:templater:dbt]
+project_dir = ./
+profiles_dir = ./
+
+[sqlfluff:rules:convention.casting_style]
+preferred_type_casting_style = shorthand
+
+[sqlfluff:rules:capitalisation.identifiers]
+extended_capitalisation_policy = upper
