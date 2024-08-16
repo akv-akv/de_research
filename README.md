@@ -4,6 +4,12 @@
 
 - **Poetry**: Manages Python package dependencies.
 
+## Version Control & Git Hooks
+
+- **Git**: Distributed version control system.
+- **[GitLeaks](https://github.com/gitleaks/gitleaks)**: Scans for hardcoded secrets to prevent them from being committed to Git.
+- **[pre-commit](https://pre-commit.com/)**: Framework for managing and maintaining multi-language pre-commit hooks.
+
 ## Infrastructure as Code
 
 - **Terraform**: Manages infrastructure resources.
@@ -11,11 +17,11 @@
 - **TFLint**: Linting tool for Terraform, used as a pre-commit hook.
 - **Trivy**: Security scanning tool, used as a pre-commit hook.
 
-## Version Control & Git Hooks
+## Data processing
 
-- **Git**: Distributed version control system.
-- **[GitLeaks](https://github.com/gitleaks/gitleaks)**: Scans for hardcoded secrets to prevent them from being committed to Git.
-- **[pre-commit](https://pre-commit.com/)**: Framework for managing and maintaining multi-language pre-commit hooks.
+- **dbt**: 
+- **duckdb**: OLAP database
+- **sqlfluff**: SQL Linter
 
 ## Local Testing
 
