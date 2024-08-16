@@ -8,4 +8,11 @@ python = "3.12.x"
 pre-commit = "^3.8.0"
 black = "^24.8.0"
 isort = "^5.13.2"
-dbt-postgres = "^1.8.2"
+sqlfluff = "^3.1.0"
+sqlfluff-templater-dbt = "^3.1.0"
+
+[tool.poetry.group.dbt-duckdb.dependencies]
+dbt-duckdb = "^1.8.2"
+fsspec = "^2024.6.1"
+s3fs = "^2024.6.1"
+
