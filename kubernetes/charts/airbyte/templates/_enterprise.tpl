@@ -8,7 +8,7 @@ Enteprise Configuration
 {{- $secretKey := .Values.global.enterprise.licenseKeySecretKey | required "You must set `global.enterprise.licenseKeySecretKey` when `global.edition` is 'enterprise'" }}
 - name: AIRBYTE_LICENSE_KEY
   valueFrom:
-    secretKeyRef: 
+    secretKeyRef:
       name: {{ .Values.global.enterprise.secretName | default (printf "%s-airbyte-secrets" .Release.Name) }}
       key: {{ .Values.global.enterprise.licenseKeySecretKey }}
 {{- end }}
@@ -24,22 +24,22 @@ Enteprise Configuration
 {{- $authInstanceAdminPasswordSecretKey := .Values.global.auth.instanceAdmin.passwordSecretKey | required "You must set `global.auth.instanceAdmin.passwordSecretKey` when `global.edition` is 'enterprise'" }}
 - name: INITIAL_USER_FIRST_NAME
   valueFrom:
-    configMapKeyRef: 
+    configMapKeyRef:
       name: {{ .Release.Name }}-airbyte-env
       key: INITIAL_USER_FIRST_NAME
 - name: INITIAL_USER_LAST_NAME
   valueFrom:
-    configMapKeyRef: 
+    configMapKeyRef:
       name: {{ .Release.Name }}-airbyte-env
       key: INITIAL_USER_LAST_NAME
 - name: INITIAL_USER_EMAIL
   valueFrom:
-    secretKeyRef: 
+    secretKeyRef:
       name: {{ .Values.global.auth.instanceAdmin.secretName | default (printf "%s-airbyte-secrets" .Release.Name) }}
       key: {{ .Values.global.auth.instanceAdmin.emailSecretKey }}
 - name: INITIAL_USER_PASSWORD
   valueFrom:
-    secretKeyRef: 
+    secretKeyRef:
       name: {{ .Values.global.auth.instanceAdmin.secretName | default (printf "%s-airbyte-secrets" .Release.Name) }}
       key: {{ .Values.global.auth.instanceAdmin.passwordSecretKey }}
 {{- end }}
@@ -56,27 +56,27 @@ Enteprise Configuration
 {{- $authIdentityProviderOIDCClientSecretSecretKey :=  .Values.global.auth.identityProvider.oidc.clientSecretSecretKey | required "You must set `global.auth.identityProvider.oidc.clientSecretSecretKey` when enabling SSO" }}
 - name: IDENTITY_PROVIDER_TYPE
   valueFrom:
-    configMapKeyRef: 
+    configMapKeyRef:
       name: {{ .Release.Name }}-airbyte-env
-      key: IDENTITY_PROVIDER_TYPE 
+      key: IDENTITY_PROVIDER_TYPE
 - name: OIDC_DOMAIN
   valueFrom:
-    configMapKeyRef: 
+    configMapKeyRef:
       name: {{ .Release.Name }}-airbyte-env
       key: OIDC_DOMAIN
 - name: OIDC_APP_NAME
   valueFrom:
-    configMapKeyRef: 
+    configMapKeyRef:
       name: {{ .Release.Name }}-airbyte-env
       key: OIDC_APP_NAME
 - name: OIDC_CLIENT_ID
   valueFrom:
-    secretKeyRef: 
+    secretKeyRef:
       name: {{ .Values.global.auth.identityProvider.secretName | default (printf "%s-airbyte-secrets" .Release.Name) }}
       key: {{ .Values.global.auth.identityProvider.oidc.clientIdSecretKey }}
 - name: OIDC_CLIENT_SECRET
   valueFrom:
-    secretKeyRef: 
+    secretKeyRef:
       name: {{ .Values.global.auth.identityProvider.secretName | default (printf "%s-airbyte-secrets" .Release.Name) }}
       key: {{ .Values.global.auth.identityProvider.oidc.clientSecretSecretKey }}
 {{- end }}

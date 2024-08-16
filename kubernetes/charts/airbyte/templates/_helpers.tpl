@@ -416,4 +416,3 @@ Convert tags to a comma-separated list of key=value pairs.
 {{- end -}}
 {{- join "," $result -}}
 {{- end -}}
-

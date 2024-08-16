@@ -31,7 +31,7 @@ Temporal Configuration
 {{- end }}
 
 {{- define "airbyte.temporal.database.user.env" }}
-- name: POSTGRES_USER 
+- name: POSTGRES_USER
   valueFrom:
     secretKeyRef:
     {{- if .Values.global.database.userSecretKey }}
@@ -43,7 +43,7 @@ Temporal Configuration
 {{- end }}
 
 {{- define "airbyte.temporal.database.password.env" }}
-- name: POSTGRES_PWD 
+- name: POSTGRES_PWD
   valueFrom:
     secretKeyRef:
       name: {{ include "airbyte.database.secretName" . }}

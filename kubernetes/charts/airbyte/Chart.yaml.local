@@ -95,4 +95,3 @@ dependencies:
     name: keycloak-setup
     repository: "file://../airbyte-keycloak-setup"
     version: "*"
-

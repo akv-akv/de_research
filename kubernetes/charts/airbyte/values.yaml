@@ -38,7 +38,7 @@ global:
       emailSecretKey: "instance-admin-email"
       # -- The key within `passwordSecretName` where the initial user's password is stored
       passwordSecretKey: "instance-admin-password"
-    
+
     # -- SSO Identify Provider configuration; (requires Enterprise)
     #identityProvider:
     #  # -- Secret name where the OIDC configuration is stored
@@ -198,7 +198,7 @@ webapp:
     fsGroup: 101
 
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=101(nginx)
     runAsUser: 101
@@ -424,7 +424,7 @@ pod-sweeper:
     fsGroup: 1001
 
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=1001(anon)
     runAsUser: 1001
@@ -532,7 +532,7 @@ server:
     fsGroup: 1000
 
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=1000(airbyte)
     runAsUser: 1000
@@ -714,7 +714,7 @@ worker:
     fsGroup: 1000
 
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=1000(airbyte)
     runAsUser: 1000
@@ -853,7 +853,7 @@ workload-launcher:
     fsGroup: 1000
 
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=1000(airbyte)
     runAsUser: 1000
@@ -1003,7 +1003,7 @@ metrics:
     fsGroup: 1000
 
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=1000(airbyte)
     runAsUser: 1000
@@ -1125,7 +1125,7 @@ airbyte-bootloader:
     fsGroup: 1000
 
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=1000(airbyte)
     runAsUser: 1000
@@ -1256,7 +1256,7 @@ temporal:
     fsGroup: 1000
 
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=1000(temporal)
     runAsUser: 1000
@@ -1374,7 +1374,7 @@ postgresql:
     fsGroup: 70
   containerSecurityContext:
     # -- Ensures the container will run with a non-root user
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=70(postgres)
     runAsUser: 70
@@ -1468,7 +1468,7 @@ cron:
     fsGroup: 1000
 
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=1000(airbyte)
     runAsUser: 1000
@@ -1639,7 +1639,7 @@ connector-builder-server:
     fsGroup: 1000
 
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=1000(airbyte)
     runAsUser: 1000
@@ -1736,7 +1736,7 @@ keycloak:
       image: {}
 
   initContainerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=70(postgres)
     runAsUser: 70
@@ -1747,9 +1747,9 @@ keycloak:
       drop: ["ALL"]
     seccompProfile:
       type: RuntimeDefault
-    
+
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=1000(keycloak)
     runAsUser: 1000
@@ -1781,7 +1781,7 @@ keycloak-setup:
     fsGroup: 1000
 
   initContainerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # gid=100(curl_user)
     runAsUser: 100
@@ -1798,7 +1798,7 @@ keycloak-setup:
       image: {}
 
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=1000(airbyte)
     runAsUser: 1000
@@ -1840,7 +1840,7 @@ workload-api-server:
     fsGroup: 1000
 
   containerSecurityContext:
-    allowPrivilegeEscalation: false 
+    allowPrivilegeEscalation: false
     runAsNonRoot: true
     # uid=1000(airbyte)
     runAsUser: 1000

@@ -61,7 +61,7 @@ spec:
               cpu: "200m"
           # Mount the volume into the pod
           securityContext:
-            allowPrivilegeEscalation: false 
+            allowPrivilegeEscalation: false
             runAsNonRoot: true
             # uid=1000(airbyte)
             runAsUser: 1000
@@ -130,7 +130,7 @@ spec:
           /usr/bin/mc mb --ignore-existing myminio/airbyte-dev-logs;
           /usr/bin/mc policy set public myminio/airbyte-dev-logs;"]
       securityContext:
-        allowPrivilegeEscalation: false 
+        allowPrivilegeEscalation: false
         runAsNonRoot: true
         # uid=1000(airbyte)
         runAsUser: 1000
