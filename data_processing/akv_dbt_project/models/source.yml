@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: s3_raw_data
+    tables:
+      - name: csv_raw_table
+        description: "Raw data from S3"
+        config:
+          external_location: "s3://de_research/dbt_duckdb/raw/test.csv"

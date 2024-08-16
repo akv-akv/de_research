@@ -1,0 +1,12 @@
+akv_dbt_project:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      filesystems:
+        - fs: s3
+          anon: false
+          key: 'minioadmin'
+          secret: 'minioadmin'
+          client_kwargs:
+            endpoint_url: "http://localhost:9000"
