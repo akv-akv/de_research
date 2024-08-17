@@ -1,12 +1,19 @@
 akv_dbt_project:
   target: dev
   outputs:
-    dev:
+    aws:
       type: duckdb
+      extensions:
+        - httpfs
+        - parquet
       filesystems:
         - fs: s3
-          anon: false
-          key: 'minioadmin'
-          secret: 'minioadmin'
-          client_kwargs:
-            endpoint_url: "http://localhost:9000"
+      external_root: s3://de_research/dbt_duckdb/
+
+    dev:
+      type: duckdb
+      external_root: ../data/processed
+    
+    dpe:
+      type: duckdb
+      path: ../data/dpe.duckdb

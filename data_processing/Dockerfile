@@ -50,3 +50,4 @@ ADD requirements.txt /usr/app/dbt/requirements.txt
 
 RUN python -m pip install -r /usr/app/dbt/requirements.txt
 RUN dbt deps
+RUN dbt compile
