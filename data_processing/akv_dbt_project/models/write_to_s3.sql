@@ -1,5 +1,11 @@
 {{ config(
-    materialized='external',
-    location='s3://de_research/dbt_duckdb/processed/result.csv') }}
+    materialized='external'
+) }}
 
-select count(*) from {{ source('s3_raw_data','csv_raw_table') }}
+select
+    round(trip_distance),
+    passenger_count,
+    count(*)
+from {{ source('de_research_s3','nyctaxi/*/yellow_tripdata_*') }}
+group by 1,2
+order by 3 desc
