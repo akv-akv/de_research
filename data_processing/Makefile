@@ -28,8 +28,8 @@ transform-run-dbt-project-evaluator:
 transform-run-dbt-limited-resources:
 	docker container run --rm -it \
 		-v ./data:/usr/app/data \
-		--cpus="0.25" --memory="256m" --memory-swap="256m" \
+		--cpus="1" --memory="1g" --memory-swap="1g" \
 		akv_dbt_project \
-		dbt build --exclude package:dbt_project_evaluator
+		dbt build
 
 transform-all: transform-build transform-run-dbt-limited-resources

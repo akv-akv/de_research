@@ -10,8 +10,8 @@ resource "aws_iam_role" "ec2_s3_ecr_role" {
     Version = "2012-10-17",
     Statement = [
       {
-        Action    = "sts:AssumeRole",
-        Effect    = "Allow",
+        Action = "sts:AssumeRole",
+        Effect = "Allow",
         Principal = {
           Service = "ec2.amazonaws.com"
         }
@@ -55,8 +55,8 @@ resource "aws_iam_policy" "s3_access_policy" {
           "arn:aws:s3:::de_research"
         ],
         Condition = {
-          "StringLike": {
-            "s3:prefix": [
+          "StringLike" : {
+            "s3:prefix" : [
               "read-prefix/",
               "write-prefix/"
             ]
@@ -82,8 +82,8 @@ resource "aws_iam_policy" "ecr_access_policy" {
     Version = "2012-10-17",
     Statement = [
       {
-        Effect   = "Allow",
-        Action   = [
+        Effect = "Allow",
+        Action = [
           "ecr:GetDownloadUrlForLayer",
           "ecr:BatchGetImage",
           "ecr:GetAuthorizationToken"
@@ -117,7 +117,7 @@ resource "aws_iam_instance_profile" "ec2_profile" {
 
 # EC2 Instance with S3 and ECR Access
 resource "aws_instance" "ec2_with_s3_ecr_access" {
-  ami           = "ami-073fe6857949c14bd"  # Replace with the latest AMI ID
+  ami           = "ami-073fe6857949c14bd" # Replace with the latest AMI ID
   instance_type = "t2.micro"
 
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name

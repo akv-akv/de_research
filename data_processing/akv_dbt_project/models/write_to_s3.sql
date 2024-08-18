@@ -3,9 +3,8 @@
 ) }}
 
 select
-    round(trip_distance),
-    passenger_count,
+    year(pickup_datetime),
     count(*)
-from {{ source('de_research_s3','nyctaxi/*/yellow_tripdata_*') }}
-group by 1,2
-order by 3 desc
+from {{ ref('stage_fhvhv_trips') }}
+group by 1
+order by 2 desc
