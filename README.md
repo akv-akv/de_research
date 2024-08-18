@@ -19,7 +19,7 @@
 
 ## Data processing
 
-- **dbt**: 
+- **dbt**:
 - **duckdb**: OLAP database
 - **sqlfluff**: SQL Linter
 

@@ -3,6 +3,12 @@ transform-build:
 		--build-arg dbt_third_party=dbt-duckdb \
 		--build-arg commit_ref=v1.8.2
 
+transform-build-linux:
+	docker buildx build --platform linux/amd64 -t akv_dbt_project . \
+		--build-arg dbt_third_party=dbt-duckdb \
+		--build-arg commit_ref=v1.8.2 \
+		--load
+
 transform-bash:
 	docker container run --rm -it -v ./data:/usr/app/data akv_dbt_project bash
 
@@ -10,7 +16,7 @@ transform-run-dbt:
 	docker container run --rm -it \
 		-v ./data:/usr/app/data \
 		akv_dbt_project \
-		dbt build --exclude package:dbt_project_evaluator
+		dbt build
 
 transform-run-dbt-project-evaluator:
 	docker container run --rm -it \
@@ -27,4 +33,3 @@ transform-run-dbt-limited-resources:
 		dbt build --exclude package:dbt_project_evaluator
 
 transform-all: transform-build transform-run-dbt-limited-resources
-

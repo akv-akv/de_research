@@ -13,7 +13,7 @@ akv_dbt_project:
     dev:
       type: duckdb
       external_root: ../data/processed
-    
+
     dpe:
       type: duckdb
       path: ../data/dpe.duckdb
