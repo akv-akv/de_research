@@ -2,5 +2,6 @@
 .terraform.lock.hcl
 terraform.tfstate*
 terraform_plan
+.infracost
 
 data_processing/data

@@ -3,31 +3,22 @@ ARG py_version=3.11.2
 FROM python:$py_version-slim-bullseye AS base
 
 RUN apt-get update \
-  && apt-get dist-upgrade -y \
   && apt-get install -y --no-install-recommends \
     build-essential=12.9 \
     ca-certificates=20210119 \
     git=1:2.30.2-1+deb11u2 \
-    make=4.3-4.1 \
-    openssh-client=1:8.4p1-5+deb11u3 \
-    software-properties-common=0.96.20.2-2.1 \
   && apt-get clean \
-  && rm -rf \
-    /var/lib/apt/lists/* \
-    /tmp/* \
-    /var/tmp/*
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /usr/share/man/*
 
 ENV PYTHONIOENCODING=utf-8
 ENV LANG=C.UTF-8
 
-RUN python -m pip install --upgrade "pip==24.0" "setuptools==69.2.0" "wheel==0.43.0" --no-cache-dir
-
+RUN python -m pip install --upgrade "pip==24.0" "setuptools==69.2.0" "wheel==0.43.0" --no-cache-dir \
+  && rm -rf /root/.cache/pip
 
 FROM base AS dbt-core
 
 ARG commit_ref=main
-
-HEALTHCHECK CMD dbt --version || exit 1
 
 WORKDIR /usr/app/dbt/
 
@@ -42,12 +33,28 @@ RUN if [ "$dbt_third_party" ]; then \
         python -m pip install --no-cache-dir "${dbt_third_party}"; \
     else \
         echo "No third party adapter provided"; \
-    fi
+    fi \
+  && rm -rf /root/.cache/pip
 
-ADD akv_dbt_project/profiles.yml /root/.dbt/profiles.yml
-ADD akv_dbt_project /usr/app/dbt
-ADD requirements.txt /usr/app/dbt/requirements.txt
+COPY akv_dbt_project/profiles.yml /root/.dbt/profiles.yml
+COPY akv_dbt_project /usr/app/dbt
+COPY requirements.txt /usr/app/dbt/requirements.txt
 
-RUN python -m pip install -r /usr/app/dbt/requirements.txt
+RUN python -m pip install -r /usr/app/dbt/requirements.txt --no-cache-dir \
+  && rm -rf /root/.cache/pip
+
 RUN dbt deps
 RUN dbt compile
+
+# Add the HEALTHCHECK instruction
+HEALTHCHECK --interval=10m --timeout=30s --start-period=1m --retries=3 \
+    CMD dbt --version || exit 1
+
+# Create a non-root user and group
+RUN groupadd -r appgroup && useradd -r -g appgroup appuser
+
+# Change ownership of the app directory
+RUN chown -R appuser:appgroup /usr/app/dbt
+
+# Switch to the non-root user
+USER appuser
