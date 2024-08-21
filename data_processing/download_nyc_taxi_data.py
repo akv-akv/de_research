@@ -27,10 +27,10 @@ taxi_types = [
     'fhvhv'
 ]
 years = [
-    2019
-    #2020,2021,2022,2023
+    #2019,2020,2021,2022,
+    2023
 ]
-months = range(1, 13)  # January to December
+months = range(4, 13)  # January to December
 
 # Download data for each combination of taxi type, year, and month
 for taxi_type in taxi_types:

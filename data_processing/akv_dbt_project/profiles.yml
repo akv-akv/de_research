@@ -2,13 +2,21 @@ akv_dbt_project:
   target: dev
   outputs:
     aws:
-      type: duckdb
+      type: duckdb     
       extensions:
         - httpfs
         - parquet
       filesystems:
         - fs: s3
       external_root: s3://de_research/dbt_duckdb/
+
+    dev-docker:
+      type: duckdb
+      path: dbt.duckdb
+      settings:
+        threads: 1
+        memory_limit: 512MB
+      external_root: ../data/processed
 
     dev:
       type: duckdb
