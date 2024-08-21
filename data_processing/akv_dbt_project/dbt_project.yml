@@ -8,6 +8,12 @@ version: '1.0.0'
 # This setting configures which "profile" dbt uses for this project.
 profile: 'akv_dbt_project'
 
+#on-run-start: "PRAGMA memory_limit = '1GB';"
+  
+vars:
+  start_date: '2023-01-01'
+  end_date: '2024-01-01'
+
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!

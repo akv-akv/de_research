@@ -12,6 +12,6 @@ sqlfluff = "^3.1.0"
 sqlfluff-templater-dbt = "^3.1.0"
 
 [tool.poetry.group.dbt-duckdb.dependencies]
-dbt-duckdb = "^1.8.2"
+dbt-duckdb = "1.8.2"
 fsspec = "^2024.6.1"
 s3fs = "^2024.6.1"

@@ -1,3 +1,4 @@
+
 select
     VendorID::SMALLINT as vendor_id,
     case
@@ -6,8 +7,8 @@ select
         else 'Unknown'
     end as vendor_description,
 
-    tpep_pickup_datetime::TIMESTAMP as pickup_datetime,
-    tpep_dropoff_datetime::TIMESTAMP as dropoff_datetime,
+    lpep_pickup_datetime::TIMESTAMP as pickup_datetime,
+    lpep_dropoff_datetime::TIMESTAMP as dropoff_datetime,
     Passenger_count::SMALLINT as passenger_count,
     Trip_distance::DOUBLE as trip_distance,
     PULocationID::INTEGER as pickup_location_id,
@@ -49,9 +50,12 @@ select
     Tip_amount::DOUBLE as tip_amount,
     Tolls_amount::DOUBLE as tolls_amount,
     Total_amount::DOUBLE as total_amount,
-    Congestion_Surcharge::DOUBLE as congestion_surcharge,
-    Airport_fee::DOUBLE as airport_fee
-
-from {{ source('de_research_s3','nyctaxi/*/yellow_tripdata_*') }}
-where tpep_pickup_datetime >= '{{ var('start_date') }}'::timestamp
-    and tpep_pickup_datetime < '{{ var('end_date') }}'::timestamp
+    Trip_type::SMALLINT as trip_type,
+    case
+        when Trip_type = 1 then 'Street-hail'
+        when Trip_type = 2 then 'Dispatch'
+        else 'Unknown'
+    end as trip_type_description
+from {{ source('de_research_s3','nyctaxi/*/green_tripdata_*') }}
+where lpep_pickup_datetime >= '{{ var('start_date') }}'::timestamp
+    and lpep_pickup_datetime < '{{ var('end_date') }}'::timestamp
