@@ -35,7 +35,8 @@ with yellow_taxi_stage as (
         airport_fee,
         NULL::SMALLINT as trip_type,
         NULL::VARCHAR as trip_type_description
-    from {{ ref('stage_yellow_taxi_trips') }} -- Replace with your yellow taxi stage model reference
+    from {{ ref('stage_yellow_taxi_trips') }}
+    where {{ date_filter('pickup_datetime', var('start_date')) }}
 ),
 
 green_taxi_stage as (
@@ -68,7 +69,8 @@ green_taxi_stage as (
         NULL::DOUBLE as airport_fee,
         trip_type,
         trip_type_description
-    from {{ ref('stage_green_taxi_trips') }} -- Replace with your green taxi stage model reference
+    from {{ ref('stage_green_taxi_trips') }}
+    where {{ date_filter('pickup_datetime', var('start_date')) }}
 ),
 
 fhvhv_stage as (
@@ -101,7 +103,8 @@ fhvhv_stage as (
         airport_fee,
         NULL::SMALLINT as trip_type,
         NULL::VARCHAR as trip_type_description
-    from {{ ref('stage_fhvhv_trips') }} -- Replace with your FHvhV stage model reference
+    from {{ ref('stage_fhvhv_trips') }}
+    where {{ date_filter('pickup_datetime', var('start_date')) }}
 )
 
 select * from yellow_taxi_stage

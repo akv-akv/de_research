@@ -53,5 +53,3 @@ select
     Airport_fee::DOUBLE as airport_fee
 
 from {{ source('de_research_s3','nyctaxi/*/yellow_tripdata_*') }}
-where tpep_pickup_datetime >= '{{ var('start_date') }}'::timestamp
-    and tpep_pickup_datetime < '{{ var('end_date') }}'::timestamp
