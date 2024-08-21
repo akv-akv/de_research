@@ -57,5 +57,3 @@ select
         else 'Unknown'
     end as trip_type_description
 from {{ source('de_research_s3','nyctaxi/*/green_tripdata_*') }}
-where lpep_pickup_datetime >= '{{ var('start_date') }}'::timestamp
-    and lpep_pickup_datetime < '{{ var('end_date') }}'::timestamp

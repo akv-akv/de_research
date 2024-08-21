@@ -28,5 +28,3 @@ select
     driver_pay::DOUBLE as driver_pay
 
 from {{ source('de_research_s3','nyctaxi/*/fhvhv_tripdata_*') }}
-where Pickup_datetime >= '{{ var('start_date') }}'::timestamp
-    and Pickup_datetime < '{{ var('end_date') }}'::timestamp

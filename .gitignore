@@ -3,5 +3,6 @@
 terraform.tfstate*
 terraform_plan
 .infracost
-
+poetry.lock
+*.duckdb
 data_processing/data
