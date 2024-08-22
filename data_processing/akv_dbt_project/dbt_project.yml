@@ -10,8 +10,9 @@ profile: 'akv_dbt_project'
 
 on-run-start:
   - "{{ register_upstream_external_models() }}"
+  - "CALL load_aws_credentials();"
 
-  
+
 vars:
   start_date: '2023-01-01'
 

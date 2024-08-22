@@ -45,16 +45,3 @@ RUN python -m pip install -r /usr/app/dbt/requirements.txt --no-cache-dir \
 
 RUN dbt deps
 RUN dbt compile
-
-# Add the HEALTHCHECK instruction
-HEALTHCHECK --interval=10m --timeout=30s --start-period=1m --retries=3 \
-    CMD dbt --version || exit 1
-
-# Create a non-root user and group
-RUN groupadd -r appgroup && useradd -r -g appgroup appuser
-
-# Change ownership of the app directory
-RUN chown -R appuser:appgroup /usr/app/dbt
-
-# Switch to the non-root user
-USER appuser
