@@ -4,8 +4,7 @@ sources:
   - name: de_research_s3
     meta:
       external_location: >
-            {% if target.name == 'aws' %}s3://de_research/dbt_duckdb/raw/{name}.parquet
-            {% elif 'dev' in target.name %}../data/raw/{name}.parquet{% endif %}
+            {% if target.name == 'aws' %}s3://de-research/data/dbt_duckdb/raw/{name}.parquet{% elif 'dev' in target.name %}../data/raw/{name}.parquet{% endif %}
     tables:
       - name: nyctaxi/*/yellow_tripdata_*
         description: Dataset from https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page

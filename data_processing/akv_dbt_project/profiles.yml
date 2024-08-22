@@ -2,13 +2,18 @@ akv_dbt_project:
   target: dev
   outputs:
     aws:
-      type: duckdb     
+      type: duckdb
+      path: dbt.duckdb
       extensions:
-        - httpfs
         - parquet
-      filesystems:
-        - fs: s3
-      external_root: s3://de_research/dbt_duckdb/
+        - httpfs
+        - aws
+      use_credential_provider: aws
+      settings:
+        threads: 1
+        memory_limit: 512MB
+        s3_region: "eu-central-1"
+      external_root: s3://de-research/data/dbt_duckdb/processed
 
     dev-docker:
       type: duckdb
