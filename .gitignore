@@ -7,3 +7,4 @@ poetry.lock
 *.duckdb
 secret.tfvars
 data_processing/data
+.venv

@@ -1,0 +1,4 @@
+logs
+.cache
+db.db
+__pycache__
