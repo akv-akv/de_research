@@ -17,7 +17,7 @@
 - **TFLint**: Linting tool for Terraform, used as a pre-commit hook.
 - **Trivy**: Security scanning tool, used as a pre-commit hook.
 
-## Data processing
+## [Data processing](./data_processing/README.md)
 
 - **dbt**:
 - **duckdb**: OLAP database

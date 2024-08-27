@@ -1,4 +1,4 @@
-akv_dbt_project:
+dbt_duckdb_s3_project:
   target: dev
   outputs:
     aws:

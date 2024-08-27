@@ -7,35 +7,37 @@ END_MONTH := 12    # Set the ending month (e.g., December)
 MONTHS := $(shell seq -w $(START_MONTH) $(END_MONTH))
 
 transform-build:
-	rm akv_dbt_project/dbt.duckdb || exit 0
-	cd akv_dbt_project && dbt build --select config.materialized:view
-	docker build -t akv_dbt_project . \
+	rm ./dbt.duckdb || exit 0
+	dbt build --select config.materialized:view
+	docker build -t dbt_duckdb_s3_project . \
 		--build-arg dbt_third_party=dbt-duckdb \
 		--build-arg commit_ref=v1.8.2
 
 transform-build-linux:
-	docker buildx build --platform linux/amd64 -t akv_dbt_project . \
+	rm ./dbt.duckdb || exit 0
+	dbt build --select config.materialized:view
+	docker buildx build --platform linux/amd64 -t dbt_duckdb_s3_project . \
 		--build-arg dbt_third_party=dbt-duckdb \
 		--build-arg commit_ref=v1.8.2 \
 		--load
 
 transform-bash:
-	docker container run --rm -it -v ./data:/usr/app/data akv_dbt_project bash
+	docker container run --rm -it -v ../data:/usr/app/data dbt_duckdb_s3_project bash
 
 transform-run-dbt-project:
 	docker container run --rm -it \
-		-v ./data:/usr/app/data \
-		-v ./akv_dbt_project/target:/usr/app/dbt/target \
-		-v ./akv_dbt_project/.tmp:/usr/app/dbt/.tmp \
-		akv_dbt_project \
+		-v ../data:/usr/app/data \
+		-v ./target:/usr/app/dbt/target \
+		-v ./.tmp:/usr/app/dbt/.tmp \
+		dbt_duckdb_s3_project \
 		dbt build --vars "{'start_date': '$(start_date)'}" --target dev-docker
 
 transform-run-dbt-model:
 	docker container run --rm -it \
-		-v ./data:/usr/app/data \
-		-v ./akv_dbt_project/target:/usr/app/dbt/target \
-		-v ./akv_dbt_project/.tmp:/usr/app/dbt/.tmp \
-		akv_dbt_project \
+		-v ../data:/usr/app/data \
+		-v ./target:/usr/app/dbt/target \
+		-v ./.tmp:/usr/app/dbt/.tmp \
+		dbt_duckdb_s3_project \
 		dbt build --vars "{'start_date': '$(start_date)'}" --target dev-docker --select $(model_name)
 
 transform-dbt-backfill:
@@ -52,19 +54,24 @@ transform-dbt-backfill:
 
 transform-run-dbt-project-evaluator:
 	docker container run --rm -it \
-		-v ./data:/usr/app/data \
-		-v ./akv_dbt_project/target:/usr/app/dbt/target \
-		-v ./akv_dbt_project/.tmp:/usr/app/dbt/.tmp \
-		akv_dbt_project \
+		-v ../data:/usr/app/data \
+		-v ./target:/usr/app/dbt/target \
+		-v ./.tmp:/usr/app/dbt/.tmp \
+		dbt_duckdb_s3_project \
 		/bin/bash -c "dbt seed && dbt deps --add-package dbt-labs/dbt_project_evaluator@0.12.0 && dbt --debug build --select package:dbt_project_evaluator --target dpe"
 
 transform-run-dbt-limited-resources:
 	docker container run --rm -it \
-		-v ./data:/usr/app/data \
-		-v ./akv_dbt_project/target:/usr/app/dbt/target \
-		-v ./akv_dbt_project/.tmp:/usr/app/dbt/.tmp \
+		-v ../data:/usr/app/data \
+		-v ./target:/usr/app/dbt/target \
+		-v ./.tmp:/usr/app/dbt/.tmp \
 		--cpus="1" --memory="1g" --memory-swap="0" \
-		akv_dbt_project \
-		dbt build --target dev-docker --vars "{'start_date': '2023-01-01'}" 
+		dbt_duckdb_s3_project \
+		dbt build --target dev-docker --vars "{'start_date': '2023-01-01'}"
 
 transform-all: transform-build transform-run-dbt-limited-resources
+
+docker:
+	aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin $(AWS_ACCOUNT_ID).dkr.ecr.eu-central-1.amazonaws.com
+	docker pull $(AWS_ACCOUNT_ID).dkr.ecr.eu-central-1.amazonaws.com/dbt_duckdb_s3_project:latest
+	docker container run --network host --rm -it my_container $(AWS_ACCOUNT_ID).dkr.ecr.eu-central-1.amazonaws.com/dbt_duckdb_s3_project:latest bash
