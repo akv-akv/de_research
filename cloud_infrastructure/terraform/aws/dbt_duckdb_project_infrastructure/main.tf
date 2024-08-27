@@ -208,8 +208,8 @@ resource "aws_iam_instance_profile" "ec2_profile" {
 #trivy:ignore:avd-aws-0033 - Suggestion to use CustomerManagedKey
 #trivy:ignore:avd-aws-0031 - For test purposes tags are MUTABLE
 resource "aws_ecr_repository" "akv_dbt_project" {
-  name = "akv_dbt_project"
-  force_delete         = true
+  name         = "akv_dbt_project"
+  force_delete = true
 
   image_tag_mutability = "MUTABLE"
   image_scanning_configuration {

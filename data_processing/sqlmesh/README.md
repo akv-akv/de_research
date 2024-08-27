@@ -35,8 +35,8 @@ sqlmesh init duckdb
 
 ```
 #creates prod environment by default
-sqlmesh plan 
+sqlmesh plan
 
 #use dev environment to run changed models and dependencies
-sqlmesh plan dev 
+sqlmesh plan dev
 ```

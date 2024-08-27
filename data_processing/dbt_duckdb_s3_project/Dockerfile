@@ -36,9 +36,9 @@ RUN if [ "$dbt_third_party" ]; then \
     fi \
   && rm -rf /root/.cache/pip
 
-COPY akv_dbt_project/profiles.yml /root/.dbt/profiles.yml
-COPY akv_dbt_project /usr/app/dbt
-COPY requirements.txt /usr/app/dbt/requirements.txt
+COPY ./profiles.yml /root/.dbt/profiles.yml
+COPY . /usr/app/dbt
+COPY ./requirements.txt /usr/app/dbt/requirements.txt
 
 RUN python -m pip install -r /usr/app/dbt/requirements.txt --no-cache-dir \
   && rm -rf /root/.cache/pip
