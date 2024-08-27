@@ -1,15 +1,11 @@
-Welcome to your new dbt project!
+# dbt-duckdb with external S3 materialization
 
-### Using the starter project
+## Overview
 
-Try running the following commands:
-- dbt run
-- dbt test
+This project utilizes dbt-duckdb to perform data transformations and materializations using S3 as an external storage layer. The aim is to build a scalable and efficient data pipeline that leverages the power of DuckDB for in-memory processing while storing large datasets externally in S3. Transformations could be run from local machine and from EC2 instance.
 
+## Project diagram
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+![image](./diagram/solution_diagram.png)
+
+## Project setup
