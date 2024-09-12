@@ -1,0 +1,3 @@
+dbt-duckdb
+fsspec
+s3fs
