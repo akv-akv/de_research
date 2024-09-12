@@ -53,7 +53,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 rm requirements-local.txt | exit 0
 pip install --upgrade pip pip-tools
-pip-compile requirements-local.in 
+pip-compile requirements-local.in
 pip install requirements-local.txt
 ```
 
@@ -70,13 +70,13 @@ After running `tree` command we can see that new files appeared in `../data/proc
 
 #### Using Docker:
 
-Docker provides an easy way to run the project in an isolated environment without worrying about local dependency management. All you need is Docker installed on your machine. The same image could be reused to run transformation on a remote server, for example EC2. 
+Docker provides an easy way to run the project in an isolated environment without worrying about local dependency management. All you need is Docker installed on your machine. The same image could be reused to run transformation on a remote server, for example EC2.
 
 The project includes a Makefile with targets for building and running the Docker image. To build the image, use `make transform-build`.
 
-Once the image is built, you can run the dbt transformations inside the Docker container. Specify the start date as follows: `make transform-run-dbt-project start_date='2023-08-01'` 
+Once the image is built, you can run the dbt transformations inside the Docker container. Specify the start date as follows: `make transform-run-dbt-project start_date='2023-08-01'`
 
-### Run in cloud with S3 bucket 
+### Run in cloud with S3 bucket
 
 This section will walk you through setting up the necessary infrastructure in AWS using Terraform and running transformations in the cloud.
 
@@ -148,7 +148,7 @@ This will create all the necessary resources, including the EC2 instance, S3 acc
 
 ## Pushing the docker image to ECR
 
-Once the infrastructure is ready, you need to push your Docker image to Amazon ECR (Elastic Container Registry). 
+Once the infrastructure is ready, you need to push your Docker image to Amazon ECR (Elastic Container Registry).
 
 In the terminal run the `aws ecr describe-repositories` to get list of ECR repositories and find repository URL. It will look like 123456789.dkr.ecr.eu-central-1.amazonaws.com.
 
@@ -171,7 +171,7 @@ aws ec2 describe-instances
 
 Connect to your EC2 instance using EC2 public address obtained from the previous step:
 ```
-ssh -i ~/.ssh/id_rsa ec2-user@ec2-3-121-183-186.eu-central-1.compute.amazonaws.com  
+ssh -i ~/.ssh/id_rsa ec2-user@ec2-3-121-183-186.eu-central-1.compute.amazonaws.com
 ```
 
 Once connected, authenticate with ECR and pull the Docker image:

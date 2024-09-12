@@ -2,9 +2,6 @@ terraform {
   required_version = ">= 1.0"
 }
 
-# Get the current AWS account ID
-data "aws_caller_identity" "current" {}
-
 data "aws_region" "current" {}
 
 # Get private subnet id from VPC module
@@ -84,7 +81,7 @@ resource "aws_instance" "ec2_with_s3_ecr_access" {
   yum update -y
   amazon-linux-extras install docker -y
   service docker start
-  
+
   EOF
 
   tags = {
@@ -194,7 +191,7 @@ resource "aws_iam_instance_profile" "ec2_profile" {
 #trivy:ignore:avd-aws-0033 - Suggestion to use CustomerManagedKey
 #trivy:ignore:avd-aws-0031 - For test purposes tags are MUTABLE
 resource "aws_ecr_repository" "dbt_duckdb_s3_project" {
-  name         = "dbt_duckdb_s3_project"
+  name         = var.docker_image_name
   force_delete = true
 
   image_tag_mutability = "MUTABLE"
