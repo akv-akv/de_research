@@ -33,15 +33,8 @@ resource "aws_security_group" "ssh_access" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${var.my_ip}/32"] # Allows SSH access from anywhere; restrict this to your IP for better security
+    cidr_blocks = ["${var.my_ip}/32"]
   }
-
-  # ingress {
-  #   from_port   = 443
-  #   to_port     = 443
-  #   protocol    = "tcp"
-  #   cidr_blocks = ["${var.my_ip}/0"] # Allows SSH access from anywhere; restrict this to your IP for better security
-  # }
 
   egress {
     description = "Allow all outbound traffic"
@@ -85,21 +78,13 @@ resource "aws_instance" "ec2_with_s3_ecr_access" {
     encrypted             = true
   }
 
-  # User data script to pull the Docker image from ECR and run it
+  # User data script to pull the Docker image from ECR
   user_data = <<-EOF
   #!/bin/bash
   yum update -y
   amazon-linux-extras install docker -y
   service docker start
-
-  # Authenticate Docker to the ECR registry
-  $(aws ecr get-login-password --region ${data.aws_region.current.name} | docker login --username AWS --password-stdin ${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com)
-
-  # Pull the Docker image from ECR
-  docker pull ${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/dbt_duckdb_s3_project:latest
-
-  # Run the Docker container
-  # docker run -d --name my_container ${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/dbt_duckdb_s3_project:latest
+  
   EOF
 
   tags = {
