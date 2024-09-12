@@ -21,12 +21,12 @@ def download_data(taxi_type: str, year: int, month: int):
     print(f"Downloaded {file_name} to {destination_file}")
 
 def parse_comma_separated_list(value: str):
-    return [item.strip() for item in value.split(",")]
+    return [item.strip() for item in value.split(',')]
 
 def main(
-    taxi_types: str = typer.Option('yellow,green,fhv,fhvhv', help="Comma-separated list of taxi types to download data for."),
-    years: str = typer.Option('2023', help="Comma-separated list of years to download data for."),
-    months: str = typer.Option("1,2,3,4,5,6,7,8,9,10,11,12", help="Comma-separated list of months to download data for.")
+    taxi_types: str = typer.Option('yellow,green,fhv,fhvhv', help='Comma-separated list of taxi types to download data for.'),
+    years: str = typer.Option('2023', help='Comma-separated list of years to download data for.'),
+    months: str = typer.Option('1,2,3,4,5,6,7,8,9,10,11,12', help='Comma-separated list of months to download data for.')
 ):
     # Parse the comma-separated values into lists
     taxi_types_list = parse_comma_separated_list(taxi_types)
@@ -43,5 +43,5 @@ def main(
                     print(f"Failed to download data for {taxi_type} {year}-{month:02d}: {e}")
     print('Download completed!')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     typer.run(main)
