@@ -11,13 +11,13 @@ data "aws_region" "current" {}
 data "aws_vpc" "selected" {
   filter {
     name   = "tag:Name"
-    values = ["akv-vpc"]
+    values = [var.aws_vpc_name]
   }
 }
 data "aws_subnet" "selected" {
   filter {
     name   = "tag:Name"
-    values = ["akv-vpc-public-${data.aws_region.current.name}a"]
+    values = ["${var.aws_vpc_name}-public-${data.aws_region.current.name}a"]
   }
 }
 
@@ -96,10 +96,10 @@ resource "aws_instance" "ec2_with_s3_ecr_access" {
   $(aws ecr get-login-password --region ${data.aws_region.current.name} | docker login --username AWS --password-stdin ${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com)
 
   # Pull the Docker image from ECR
-  docker pull ${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/akv_dbt_project:latest
+  docker pull ${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/dbt_duckdb_s3_project:latest
 
   # Run the Docker container
-  # docker run -d --name my_container ${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/akv_dbt_project:latest
+  # docker run -d --name my_container ${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/dbt_duckdb_s3_project:latest
   EOF
 
   tags = {
@@ -126,6 +126,7 @@ resource "aws_iam_role" "ec2_s3_ecr_role" {
 }
 
 # S3 Access Policy
+#trivy:ignore:avd-aws-0057 - Allow wildcarded ListBucket for test purposes
 resource "aws_iam_policy" "s3_access_policy" {
   name        = "s3_access_policy"
   description = "Policy to allow EC2 to read from one S3 prefix and write to another"
@@ -148,7 +149,7 @@ resource "aws_iam_policy" "s3_access_policy" {
           "s3:PutObject"
         ],
         Resource = [
-          "arn:aws:s3:::de-research/data/dbt_duckdb/processed/*"
+          "arn:aws:s3:::${var.aws_s3_bucket_name}/data/dbt_duckdb/processed/*"
         ]
       },
     ]
@@ -183,7 +184,7 @@ resource "aws_iam_policy" "ecr_access_policy" {
           "ecr:BatchGetImage",
           "ecr:GetAuthorizationToken"
         ],
-        Resource = ["arn:aws:ecr:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:repository/akv_dbt_project"]
+        Resource = [aws_ecr_repository.dbt_duckdb_s3_project.arn]
         #Resource = "*"
       },
       {
@@ -207,8 +208,8 @@ resource "aws_iam_instance_profile" "ec2_profile" {
 # ECR Repository
 #trivy:ignore:avd-aws-0033 - Suggestion to use CustomerManagedKey
 #trivy:ignore:avd-aws-0031 - For test purposes tags are MUTABLE
-resource "aws_ecr_repository" "akv_dbt_project" {
-  name         = "akv_dbt_project"
+resource "aws_ecr_repository" "dbt_duckdb_s3_project" {
+  name         = "dbt_duckdb_s3_project"
   force_delete = true
 
   image_tag_mutability = "MUTABLE"

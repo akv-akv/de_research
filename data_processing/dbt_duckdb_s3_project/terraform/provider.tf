@@ -10,5 +10,5 @@ terraform {
 
 provider "aws" {
   shared_config_files = ["~/.aws/config"]
-  profile             = "akv"
+  profile             = var.aws_profile_name
 }
