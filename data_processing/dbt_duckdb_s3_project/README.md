@@ -79,7 +79,7 @@ This section will walk you through setting up the necessary infrastructure in AW
 
 #### Create a docker image for AMD64 architecture
 
-I'm using Macbook with M1 chip for local development, and the EC2 machine will have AMD64 architecture. Therefore docker image need to be assembled for server arch. 
+In my case, local development is being done using Macbook with M1 chip, and the EC2 machine will have AMD64 architecture. Therefore docker image need to be assembled for server arch. 
 
 ```
 make transform-build-linux
