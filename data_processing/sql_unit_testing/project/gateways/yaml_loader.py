@@ -4,7 +4,11 @@ from pathlib import Path
 
 
 class YAMLLoader(BaseFileLoader):
+    @classmethod
     def load_dict_from_yaml(self, file_path: str | Path) -> dict:
         file_path = self.validate_file_path(file_path)
-        with file_path.open('r') as file:
-            return yaml.safe_load(file)
+
+        with open(file_path, "r") as file:
+            config = yaml.safe_load(file)
+            #print(f"Loaded YAML Config: {config}")  # Debugging
+        return config
